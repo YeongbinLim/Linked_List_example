@@ -61,7 +61,6 @@ void delete(list* L, int position)
 
 	L->count--;
 }
-
 void printNodes(list *L) {
 	node *p = L->head;
 	putchar('[');
@@ -72,7 +71,40 @@ void printNodes(list *L) {
 	putchar(']');
 	putchar('\n');
 }
-
+void Insert_stack(list* L,int value)
+{
+	int i;
+	node* p=L->head;
+	for (i = 0; i < L->count-2; i++)
+	{
+		p=p->next;
+	}
+	node *newnode = (node *)malloc(sizeof(int));
+	newnode->data = value;
+	node* tmp = p->next;
+	p->next = newnode;
+	newnode->next = tmp;
+	L->count++;
+}
+void delete_stack_queue(list* L)
+{
+	node *search = L->head;
+	int i;
+	for (i = 0; i < L->count - 3; i++)
+	{
+		search = search->next;
+	}
+	node *tmp = search->next;
+	search->next = tmp->next;
+}
+void Insert_queue(list* L, int value)
+{
+	node *newnode = (node *)malloc(sizeof(int));
+	newnode->data = value;
+	node* tmp_1;
+	newnode->next = L->head;
+	L->head = newnode;
+}
 int main()
 {
 	list *L = (list *)malloc(sizeof(list));
@@ -91,6 +123,9 @@ int main()
 	delete(L,3);
 	delete(L,2);
 	Insert(L, 7,2);
+	Insert_stack(L, 4);
+	delete_stack_queue(L);
+	Insert_queue(L, 7);
 	printNodes(L);
 	system("pause");
 	return 0;
